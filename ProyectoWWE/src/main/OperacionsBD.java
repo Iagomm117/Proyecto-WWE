@@ -23,7 +23,7 @@ public class OperacionsBD {
     private static Connection conn = null;
 
     public OperacionsBD() {
-        conn = conectar();
+        conn = getConexion();
     }
 
     
