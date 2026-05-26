@@ -17,7 +17,7 @@ import model.Titulo;
  */
 public class OperacionsBD {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/wwe_db";
+    private static final String URL = "jdbc:mysql://zephyr.proxy.rlwy.net:11945/wwe_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&connectTimeout=5000&socketTimeout=30000";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static Connection conn = null;
@@ -27,7 +27,7 @@ public class OperacionsBD {
     }
 
     
-    public static Connection conectar() {
+    public static Connection getConexion() {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -36,17 +36,6 @@ public class OperacionsBD {
             System.out.println("Error al conectar: " + e.getMessage());
         }
         return conn;
-    }
-
-    public static Connection getConexion() {
-        try {
-            String url = "jdbc:mysql://localhost:3306/wwe_db";
-            String user = "root";
-            String pass = "root";
-            return DriverManager.getConnection(url, user, pass);
-        } catch (SQLException e) {
-            return null;
-        }
     }
 
     public static void cerrarConexion() throws SQLException {
