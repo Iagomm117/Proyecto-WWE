@@ -331,7 +331,7 @@ public class OperacionsBD {
     public void luchadorGuardar(Loitador l) throws SQLException {
         String sql;
         if (l.getId_loitador() == 0) {
-            sql = "INSERT INTO loitador (nome, estado, categoria_peso, entrada, foto_url,veces_consultado) VALUES (?, ?, ?, ?, ?,?)";
+            sql = "INSERT INTO loitador (nome, estado, categoria_peso, entrada, foto_url,veces_consultado) VALUES (?, ?, ?, ?, ?, ?)";
         } else {
             sql = "UPDATE loitador SET nome = ?, estado = ?, categoria_peso = ?, entrada = ?, foto_url = ?, veces_consultado = ? WHERE id_loitador = ?";
         }
