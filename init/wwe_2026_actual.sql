@@ -44,6 +44,7 @@ CREATE TABLE loitador (
     foto_url            VARCHAR(2000)    NULL COMMENT 'URL foto oficial WWE',
     data_creacion       DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_modificacion   DATETIME        NULL ON UPDATE CURRENT_TIMESTAMP,
+    veces_consultado    INT             Not NULL DEFAULT 0,
     CONSTRAINT pk_loitador PRIMARY KEY (id_loitador),
     CONSTRAINT fk_loitador_marca  FOREIGN KEY (id_marca)
         REFERENCES marca(id_marca)
