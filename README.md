@@ -1,3 +1,3 @@
 # Proyecto-WWE
 
- Para acceder a la aplicacion se tiene que descargar el proyecto y descomprimirlo si se descarga como zip. Hecho esto, se abre netbeans y se abre el proyecto de la aplicacion y se ejecuta el programa. Al tener la base de datos en la nube no deberia de dar ningun problema. Para poder acceder se puede crear una cuenta o usar la cuenta con usuario test y contraseña abc123.
+ Para acceder a la aplicacion se puede usar el .exe agregado en el .zip, o el instalado en la ova e incluso con el codigo del programa. Para poder acceder a la aplicacion se pueden crear credenciales de inicio en la ventana de registro o se puede usar el usuario `test` , con contraseña `abc123.`
