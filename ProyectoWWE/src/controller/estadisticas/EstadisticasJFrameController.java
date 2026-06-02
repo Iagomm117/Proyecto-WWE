@@ -58,7 +58,7 @@ public class EstadisticasJFrameController {
     }
 
     private void ejecutarReporteTitulosModificados() {
-        generarReporte("loitadorModificado.jrxml", "Auditoría: Títulos Modificados");
+        generarReporte("tituloModificado.jrxml", "Auditoría: Títulos Modificados");
     }
 
     private void generarReporte(String nombreArchivo, String titulo) {
