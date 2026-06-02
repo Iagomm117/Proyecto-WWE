@@ -1,15 +1,14 @@
 package controller.estadisticas;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JOptionPane;
 import main.OperacionsBD;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import view.estadisticas.EstadisticasJFrame;
 
@@ -39,33 +38,40 @@ public class EstadisticasJFrameController {
     }
 
     private void ejecutarReporteLuchadorCombates() {
-        generarReporte("src/reports/loitadorPPV.jrxml", "Reporte: Luchador/Combates");
+        generarReporte("loitadorPPV.jrxml", "Reporte: Luchador/Combates");
     }
 
     private void ejecutarReporteLuchadorConsultas() {
-        generarReporte("src/reports/loitadorConsultado.jrxml", "Reporte: Luchador/Consultas");
+        generarReporte("loitadorConsultado.jrxml", "Reporte: Luchador/Consultas");
     }
 
     private void ejecutarReportePpvEdiciones() {
-        generarReporte("src/reports/edicionesPPV.jrxml", "Reporte: PPV/Ediciones");
+        generarReporte("edicionesPPV.jrxml", "Reporte: PPV/Ediciones");
     }
 
     private void ejecutarReporteMarcaLuchadores() {
-        generarReporte("src/reports/loitadoresMarca.jrxml", "Reporte: Marca/Luchadores");
+        generarReporte("loitadoresMarca.jrxml", "Reporte: Marca/Luchadores");
     }
 
     private void ejecutarReporteLuchadoresModificados() {
-        generarReporte("src/reports/loitadorModificado.jrxml", "Auditoría: Luchadores Modificados");
+        generarReporte("loitadorModificado.jrxml", "Auditoría: Luchadores Modificados");
     }
 
     private void ejecutarReporteTitulosModificados() {
-        generarReporte("src/reports/loitadorModificado.jrxml", "Auditoría: Títulos Modificados");
+        generarReporte("loitadorModificado.jrxml", "Auditoría: Títulos Modificados");
     }
 
-    private void generarReporte(String rutaJrxml, String titulo) {
+    private void generarReporte(String nombreArchivo, String titulo) {
         try {
-            JasperReport reporte = JasperCompileManager.compileReport(rutaJrxml);
-            JasperPrint impresion = JasperFillManager.fillReport(reporte, new HashMap<>(), conn);
+            String ruta = "/reports/" + nombreArchivo.replace(".jrxml", ".jasper");
+            InputStream reporteStream = getClass().getResourceAsStream(ruta);
+
+            if (reporteStream == null) {
+                throw new Exception("No se encontró el archivo: " + ruta + " dentro del JAR.");
+            }
+
+            JasperPrint impresion = JasperFillManager.fillReport(reporteStream, new HashMap<>(), conn);
+
             JasperViewer visor = new JasperViewer(impresion, false);
             visor.setTitle(titulo);
             visor.setVisible(true);
