@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionListener;
 
+
 /**
  *
  * @author iagom
@@ -16,6 +17,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         configurarFondo();
+
     }
 
     /**
@@ -94,11 +96,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private void marcaJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaJMenuItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_marcaJMenuItemActionPerformed
-    
+
     private void configurarFondo() {
         this.getContentPane().setBackground(java.awt.Color.BLACK);
         fondoLabel = new javax.swing.JLabel();
-        
+
         try {
             javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/res/WWE-Logo.png"));
             java.awt.Image img = icon.getImage().getScaledInstance(400, 400, java.awt.Image.SCALE_SMOOTH);
@@ -112,15 +114,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
         this.setLayout(new java.awt.BorderLayout());
         this.add(fondoLabel, java.awt.BorderLayout.CENTER);
-        
-        this.pack(); 
+
+        this.pack();
         this.setSize(900, 600);
         this.setLocationRelativeTo(null);
     }
-    
-    /**
-     * @param args the command line arguments
-     */
+
     public void addMarcaListener(ActionListener al) {
         marcaJMenuItem.addActionListener(al);
     }
@@ -144,7 +143,8 @@ public class MainJFrame extends javax.swing.JFrame {
     public void addQuitListener(ActionListener al) {
         quitMenuItem.addActionListener(al);
     }
-     public void addEstadisticasListener(ActionListener al) {
+
+    public void addEstadisticasListener(ActionListener al) {
         estadisiticasMenuItem.addActionListener(al);
     }
 

@@ -1,14 +1,14 @@
 package view.login;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 public class LoginFrame extends javax.swing.JFrame {
 
     public LoginFrame() {
         initComponents();
-        this.getContentPane().setBackground(new Color(0, 0, 0));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.cargarYRedimensionarLogo(60);
+
     }
 
     /**
@@ -20,97 +20,112 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cardPanel = new javax.swing.JPanel();
+        themeButton = new javax.swing.JButton();
+        logoLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        nombreLabel = new javax.swing.JLabel();
+        nombreTextField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
+        mensajeLabel = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
         loginButton = new javax.swing.JButton();
-        nombreTextField = new javax.swing.JTextField();
-        PasswordField = new javax.swing.JPasswordField();
-        nombreLabel = new javax.swing.JLabel();
-        passwordLabel = new javax.swing.JLabel();
-        mensajeLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Acceso al Sistema");
+        setResizable(false);
+
+        cardPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(30, 30, 30, 30));
+
+        themeButton.setToolTipText("Cambiar tema");
+
+        logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("INICIAR SESIÓN");
+
+        nombreLabel.setText("Usuario");
+
+        passwordLabel.setText("Contraseña");
+
+        mensajeLabel.setText(" ");
 
         registerButton.setText("Registrarse");
 
         loginButton.setText("Aceptar");
 
-        nombreTextField.setText("");
+        org.jdesktop.layout.GroupLayout cardPanelLayout = new org.jdesktop.layout.GroupLayout(cardPanel);
+        cardPanel.setLayout(cardPanelLayout);
+        cardPanelLayout.setHorizontalGroup(
+            cardPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, themeButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(nombreTextField)
+            .add(PasswordField)
+            .add(mensajeLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(logoLabel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(cardPanelLayout.createSequentialGroup()
+                .add(cardPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(cardPanelLayout.createSequentialGroup()
+                        .add(registerButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 28, Short.MAX_VALUE)
+                        .add(loginButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(cardPanelLayout.createSequentialGroup()
+                        .add(cardPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(nombreLabel)
+                            .add(passwordLabel))
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        cardPanelLayout.setVerticalGroup(
+            cardPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(cardPanelLayout.createSequentialGroup()
+                .add(themeButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
+                .add(logoLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(15, 15, 15)
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(25, 25, 25)
+                .add(nombreLabel)
+                .add(6, 6, 6)
+                .add(nombreTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 38, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(passwordLabel)
+                .add(6, 6, 6)
+                .add(PasswordField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 38, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(10, 10, 10)
+                .add(mensajeLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(20, 20, 20)
+                .add(cardPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(registerButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(loginButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 36, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        );
 
-        PasswordField.setText("");
-
-        nombreLabel.setFont(new java.awt.Font("Inter Regular", 1, 18)); // NOI18N
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
-        nombreLabel.setText("Usuario:");
-
-        passwordLabel.setFont(new java.awt.Font("Inter Regular", 1, 18)); // NOI18N
-        passwordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        passwordLabel.setText("Contraseña: ");
-
-        mensajeLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        mensajeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        mensajeLabel.setText(" ");
-
-        jLabel1.setText("");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(loginButton)
-                        .addGap(159, 159, 159)
-                        .addComponent(registerButton)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(passwordLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nombreLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(96, 96, 96))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(mensajeLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
-                        .addComponent(jLabel1)))
-                .addGap(0, 0, Short.MAX_VALUE))
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .add(60, 60, 60)
+                .add(cardPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(60, 60, 60))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel))
-                .addGap(18, 18, 18)
-                .addComponent(mensajeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registerButton)
-                    .addComponent(loginButton))
-                .addContainerGap())
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(layout.createSequentialGroup()
+                .add(40, 40, 40)
+                .add(cardPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(40, 40, 40))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    public javax.swing.JButton getThemeButton() {
+        return themeButton;
+    }
 
     public void addLoginButtonActionListener(ActionListener al) {
         this.loginButton.addActionListener(al);
@@ -132,14 +147,39 @@ public class LoginFrame extends javax.swing.JFrame {
         this.mensajeLabel.setText(s);
     }
 
+    private void cargarYRedimensionarLogo(int anchoDeseado) {
+        try {
+            java.net.URL urlLogo = getClass().getResource("/res/WWE_Logo_little.png");
+            if (urlLogo != null) {
+                javax.swing.ImageIcon iconoOriginal = new javax.swing.ImageIcon(urlLogo);
+                java.awt.Image imagenOriginal = iconoOriginal.getImage();
+
+                java.awt.Image imagenRedimensionada = imagenOriginal.getScaledInstance(
+                        anchoDeseado,
+                        -1,
+                        java.awt.Image.SCALE_SMOOTH
+                );
+
+                logoLabel.setIcon(new javax.swing.ImageIcon(imagenRedimensionada));
+            } else {
+                System.out.println("Non se puido atopar o archivo do logo.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao cargar o logo: " + e.getMessage());
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JPanel cardPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel mensajeLabel;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton registerButton;
+    private javax.swing.JButton themeButton;
     // End of variables declaration//GEN-END:variables
 }

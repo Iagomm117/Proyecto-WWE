@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loitadoresModificados" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9a8b7c6d-5e4f-3a2b-1c0d-ffeeddccbbaa">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WWE"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT nome, estado, categoria_peso, data_modificacion FROM loitador WHERE data_modificacion >= NOW() - INTERVAL 7 DAY ORDER BY data_modificacion DESC]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="categoria_peso" class="java.lang.String"/>
+	<field name="data_modificacion" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="11223344-5566-7788-9900-aabbccddeeff"/>
+				<staticText>
+					<reportElement style="Title" x="20" y="10" width="515" height="50" uuid="22334455-6677-8899-00aa-bbccddeeff11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="28" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Auditoría de Elenco]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="20" y="60" width="515" height="25" uuid="33445566-7788-9900-00aa-bbccddeeff11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Loitadores modificados na última semana (últimos 7 días)]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="25" forecolor="#000000" backcolor="#CC0000" uuid="44556677-8899-00aa-bbcc-ddeeff112233"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="400" y="3" width="144" height="20" forecolor="#FFFFFF" uuid="55667788-9900-00aa-bbcc-ddeeff112233"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="5" width="160" height="20" forecolor="#000000" uuid="66778899-00aa-bbcc-ddee-ff1122334455"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="160" y="5" width="90" height="20" forecolor="#000000" uuid="77889900-aa22-bbcc-ddee-ff1122334455"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="250" y="5" width="140" height="20" forecolor="#000000" uuid="889900aa-bbcc-ddee-ff11-223344556677"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoría Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="390" y="5" width="165" height="20" forecolor="#000000" uuid="9900aabb-ccdd-eeff-1122-334455667788"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Última Modificación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="25" uuid="00aabbcc-ddee-ff11-2233-445566778899"/>
+				<textField>
+					<reportElement style="Detail" x="0" y="2" width="160" height="20" uuid="1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="160" y="2" width="90" height="20" uuid="2a3b4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="250" y="2" width="140" height="20" uuid="3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{categoria_peso}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd HH:mm">
+					<reportElement style="Detail" x="390" y="2" width="165" height="20" uuid="4a5b6c7d-7e8f-9a0b-1c2d-3e4f5a6b7c8d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{data_modificacion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="aabbccdd-eeff-1122-3344-556677889900"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="bbccddee-ff11-2233-4455-6677889900aa"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="ccddeeff-1122-3344-4556-677889900aaa"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Páxina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

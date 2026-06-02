@@ -18,9 +18,6 @@ public class TituloJFrame extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(new java.awt.Color(18, 18, 18));
         lblId.setForeground(new java.awt.Color(200, 200, 200));
-        chkMaximo.setForeground(java.awt.Color.WHITE);
-        chkMaximo.setBackground(new java.awt.Color(18, 18, 18));
-
         this.pack();
         this.setLocationRelativeTo(null);
     }
@@ -58,36 +55,25 @@ public class TituloJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(250);
 
-        listaTitulos.setBackground(new java.awt.Color(30, 30, 30));
-        listaTitulos.setForeground(new java.awt.Color(255, 255, 255));
         scrollLista.setViewportView(listaTitulos);
 
         splitPane.setLeftComponent(scrollLista);
-
-        panelDerecho.setBackground(new java.awt.Color(0, 0, 0));
 
         lblFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo Registro");
 
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
         nombreLabel.setText("Nombre del Título:");
 
-        estadoLabel.setForeground(new java.awt.Color(255, 255, 255));
         estadoLabel.setText("Estado:");
 
-        comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "vacante", "inactivo" }));
-
-        dataLabel.setForeground(new java.awt.Color(255, 255, 255));
         dataLabel.setText("Fecha de Vigencia:");
 
-        fotoUrlLabel.setForeground(new java.awt.Color(255, 255, 255));
         fotoUrlLabel.setText("URL Foto/Logo:");
 
-        chkMaximo.setBackground(new java.awt.Color(0, 0, 0));
-        chkMaximo.setForeground(new java.awt.Color(255, 255, 255));
         chkMaximo.setText("Es Título Máximo (Main Event)");
+        chkMaximo.setOpaque(true);
 
         btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
         btnNuevo.setText("Nuevo");
@@ -159,9 +145,9 @@ public class TituloJFrame extends javax.swing.JFrame {
                 .addComponent(fotoUrlLabel)
                 .addGap(5, 5, 5)
                 .addComponent(txtFotoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(chkMaximo)
-                .addGap(40, 40, 40)
+                .addGap(42, 42, 42)
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,7 +165,7 @@ public class TituloJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(splitPane)
         );
 
         pack();

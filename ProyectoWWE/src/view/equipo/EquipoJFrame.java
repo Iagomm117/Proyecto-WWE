@@ -57,29 +57,21 @@ public class EquipoJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(250);
 
-        listaEquipos.setBackground(new java.awt.Color(30, 30, 30));
-        listaEquipos.setForeground(new java.awt.Color(255, 255, 255));
         scrollLista.setViewportView(listaEquipos);
 
         splitPane.setLeftComponent(scrollLista);
-
-        panelDerecho.setBackground(new java.awt.Color(0, 0, 0));
 
         lblFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo Registro");
 
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
         nombreLabel.setText("Nombre del Equipo:");
 
-        marcaLabel.setForeground(new java.awt.Color(255, 255, 255));
         marcaLabel.setText("Marca / Show:");
 
-        descripcionLabel.setForeground(new java.awt.Color(255, 255, 255));
         descripcionLabel.setText("Descripción del Equipo:");
 
-        fotoUrlLabel.setForeground(new java.awt.Color(255, 255, 255));
         fotoUrlLabel.setText("URL de la Foto (Base de Datos):");
 
         btnNuevo.setBackground(new java.awt.Color(0, 102, 255));

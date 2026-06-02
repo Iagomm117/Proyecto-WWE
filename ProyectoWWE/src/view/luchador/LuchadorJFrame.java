@@ -39,6 +39,10 @@ public class LuchadorJFrame extends javax.swing.JFrame {
         return cbPeso.getSelectedItem() != null ? cbPeso.getSelectedItem().toString() : "";
     }
 
+    public javax.swing.JTextField getTxtBuscar() {
+        return txtBuscar;
+    }
+
     public String getNome() {
         return txtNome.getText();
     }
@@ -149,7 +153,7 @@ public class LuchadorJFrame extends javax.swing.JFrame {
     public void addBtnLimpiarListener(ActionListener al) {
         btnLimpiar.addActionListener(al);
     }
-    
+
     public void addBtnQRListener(ActionListener al) {
         btnQR.addActionListener(al);
     }
@@ -164,6 +168,8 @@ public class LuchadorJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         splitPane = new javax.swing.JSplitPane();
+        panelIzquierdoContainer = new javax.swing.JPanel();
+        txtBuscar = new javax.swing.JTextField();
         scrollLista = new javax.swing.JScrollPane();
         listaNombres = new javax.swing.JList<>();
         panelDerecho = new javax.swing.JPanel();
@@ -189,32 +195,45 @@ public class LuchadorJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(250);
 
-        listaNombres.setBackground(new java.awt.Color(30, 30, 30));
-        listaNombres.setForeground(new java.awt.Color(255, 255, 255));
+        txtBuscar.putClientProperty("JTextField.placeholderText", "Buscar loitador...");
+        txtBuscar.putClientProperty("JTextField.showClearButton", true);
+
         scrollLista.setViewportView(listaNombres);
 
-        splitPane.setLeftComponent(scrollLista);
+        javax.swing.GroupLayout panelIzquierdoContainerLayout = new javax.swing.GroupLayout(panelIzquierdoContainer);
+        panelIzquierdoContainer.setLayout(panelIzquierdoContainerLayout);
+        panelIzquierdoContainerLayout.setHorizontalGroup(
+            panelIzquierdoContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIzquierdoContainerLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
+            .addComponent(scrollLista)
+        );
+        panelIzquierdoContainerLayout.setVerticalGroup(
+            panelIzquierdoContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIzquierdoContainerLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(scrollLista, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE))
+        );
 
-        panelDerecho.setBackground(new java.awt.Color(0, 0, 0));
+        splitPane.setLeftComponent(panelIzquierdoContainer);
 
         lblFoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo Registro");
 
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
         nombreLabel.setText("Nombre del Luchador:");
 
-        estadoLabel.setForeground(new java.awt.Color(255, 255, 255));
         estadoLabel.setText("Estado:");
 
-        pesoLabel.setForeground(new java.awt.Color(255, 255, 255));
         pesoLabel.setText("Categoría de Peso:");
 
-        cancionLabel.setForeground(new java.awt.Color(255, 255, 255));
         cancionLabel.setText("Nombre cancion:");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("URL de la Foto (Base de Datos):");
 
         btnLimpiar.setBackground(new java.awt.Color(0, 102, 255));
@@ -237,38 +256,35 @@ public class LuchadorJFrame extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
                         .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDerechoLayout.createSequentialGroup()
-                                .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombreLabel)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panelDerechoLayout.createSequentialGroup()
-                                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(estadoLabel)
-                                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40)
-                                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pesoLabel)
-                                    .addComponent(cbPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(cancionLabel)
-                            .addComponent(jLabel5)
-                            .addComponent(txtFotoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelDerechoLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreLabel)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(estadoLabel)
+                            .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pesoLabel)
+                            .addComponent(cbPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cancionLabel)
+                    .addComponent(jLabel5)
+                    .addComponent(txtFotoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelDerechoLayout.createSequentialGroup()
                         .addComponent(txtEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnQR)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnQR)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelDerechoLayout.setVerticalGroup(
             panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,9 +359,11 @@ public class LuchadorJFrame extends javax.swing.JFrame {
     private javax.swing.JList<String> listaNombres;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JPanel panelDerecho;
+    private javax.swing.JPanel panelIzquierdoContainer;
     private javax.swing.JLabel pesoLabel;
     private javax.swing.JScrollPane scrollLista;
     private javax.swing.JSplitPane splitPane;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtEntrada;
     private javax.swing.JTextField txtFotoUrl;
     private javax.swing.JTextField txtNome;

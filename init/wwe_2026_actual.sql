@@ -82,6 +82,7 @@ CREATE TABLE titulo (
     data_vixencia     DATE            NOT NULL,
     id_marca          INT             NULL,
     foto_url          VARCHAR(2000)    NULL COMMENT 'URL foto do cinto',
+    data_creacion       DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_modificacion DATETIME        NULL ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT pk_titulo PRIMARY KEY (id_titulo),
     CONSTRAINT fk_titulo_marca FOREIGN KEY (id_marca)

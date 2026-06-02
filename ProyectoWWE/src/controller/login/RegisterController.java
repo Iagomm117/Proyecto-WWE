@@ -1,6 +1,7 @@
 package controller.login;
 
 import controller.login.LoginController;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import java.awt.event.ActionListener;
@@ -8,17 +9,20 @@ import javax.swing.JOptionPane;
 import main.OperacionsBD;
 import service.Seguridad;
 import view.login.LoginFrame;
-import view.usuarios.RegisterFrame;
+import view.login.RegisterFrame;
 
 /**
  *
  * @author iagom
  */
 public class RegisterController {
+
     private RegisterFrame view;
+    private Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(LoginFrame.class.getResource("/res/wwe-64.png"));
 
     public RegisterController(RegisterFrame view) {
         this.view = view;
+        this.view.setIconImage(icon);
         this.view.addRegisterButtonActionListener(getRegistrarListener());
         this.view.addLoginButtonActionListener(getVolverLoginListener());
     }
@@ -35,13 +39,13 @@ public class RegisterController {
                     view.setTextMensajeLabel("Error: Faltan datos.");
                     return;
                 }
-                
+
                 String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
                 if (!email.matches(emailRegex)) {
                     view.setTextMensajeLabel("Error: El email no es válido.");
                     return;
                 }
-                
+
                 if (pass.length() < 4) {
                     view.setTextMensajeLabel("Clave demasiado corta.");
                     return;
@@ -50,17 +54,19 @@ public class RegisterController {
                 String passHash = Seguridad.encryptSHA256(pass);
 
                 String sql = "INSERT INTO usuario (nome_usuario, email, contrasinal_hash) VALUES (?, ?, ?)";
-                
+
                 try (Connection con = OperacionsBD.getConexion()) {
-                    if (con == null) return;
-                    
+                    if (con == null) {
+                        return;
+                    }
+
                     try (PreparedStatement ps = con.prepareStatement(sql)) {
                         ps.setString(1, nombreUsuario);
                         ps.setString(2, email);
                         ps.setString(3, passHash);
 
                         ps.executeUpdate();
-                        
+
                         JOptionPane.showMessageDialog(view, "¡Usuario " + nombreUsuario + " registrado!");
                         volverAlLogin();
                     }
@@ -87,7 +93,7 @@ public class RegisterController {
     private void volverAlLogin() {
         view.dispose();
         LoginFrame lf = new LoginFrame();
-        new LoginController(lf); 
+        new LoginController(lf);
         lf.setVisible(true);
         lf.setLocationRelativeTo(null);
     }

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ppvMaisEdicions" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WWE"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM (SELECT nome_grupo, COUNT(id_ppv) AS total FROM grupo_ppv JOIN ppv ON grupo_ppv.id_grupo_ppv = ppv.id_grupo_ppv GROUP BY grupo_ppv.id_grupo_ppv, nome_grupo) AS subconsulta ORDER BY total DESC LIMIT 5]]>
+	</queryString>
+	<field name="nome_grupo" class="java.lang.String"/>
+	<field name="total" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="95" backcolor="#000000" uuid="11223344-5566-7788-9900-aabbccddeeff"/>
+				<staticText>
+					<reportElement style="Title" x="20" y="10" width="515" height="50" uuid="22334455-6677-8899-00aa-bbccddeeff11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="32" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Histórico de PPVs]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="20" y="60" width="515" height="25" uuid="33445566-7788-9900-00aa-bbccddeeff11"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Top 5 Franquías de PPV con máis edicións celebradas]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="100" width="555" height="25" forecolor="#000000" backcolor="#CC0000" uuid="44556677-8899-00aa-bbcc-ddeeff112233"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="400" y="3" width="144" height="20" forecolor="#FFFFFF" uuid="55667788-9900-00aa-bbcc-ddeeff112233"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="10" y="5" width="340" height="20" forecolor="#000000" uuid="66778899-00aa-bbcc-ddee-ff1122334455"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Franquía / Evento PPV]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="380" y="5" width="165" height="20" forecolor="#000000" uuid="77889900-aa22-bbcc-ddee-ff1122334455"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Edicións]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="25" uuid="889900aa-bbcc-ddee-ff11-223344556677"/>
+				<textField>
+					<reportElement style="Detail" x="10" y="2" width="340" height="20" uuid="9900aabb-ccdd-eeff-1122-334455667788"/>
+					<textElement verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome_grupo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="380" y="2" width="165" height="20" uuid="00aabbcc-ddee-ff11-2233-445566778899"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="aabbccdd-eeff-1122-3344-556677889900"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="bbccddee-ff11-2233-4455-6677889900aa"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="ccddeeff-1122-3344-4556-677889900aaa"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Páxina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="330" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="20" width="555" height="300" uuid="ddeeff11-2233-4455-6677-889900aabbcc"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Volume de Edicións por Franquía"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Edicións Rexistradas"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nome_grupo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

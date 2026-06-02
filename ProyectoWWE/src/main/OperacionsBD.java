@@ -26,7 +26,6 @@ public class OperacionsBD {
         conn = getConexion();
     }
 
-    
     public static Connection getConexion() {
 
         try {
@@ -144,6 +143,120 @@ public class OperacionsBD {
         }
     }
 
+    public List<Loitador> listarParticipantesPorCombate(int idCombate) {
+        List<Loitador> lista = new ArrayList<>();
+        String sql = "SELECT l.id_loitador, l.nome, l.estado, l.categoria_peso, l.entrada, l.foto_url, l.veces_consultado "
+                + "FROM loitador l "
+                + "JOIN combate_loitador cl ON l.id_loitador = cl.id_loitador "
+                + "WHERE cl.id_combate = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCombate);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Loitador l = new Loitador();
+                    l.setId_loitador(rs.getInt("id_loitador"));
+                    l.setNome(rs.getString("nome"));
+                    l.setEstado(rs.getString("estado"));
+                    l.setCategoria_peso(rs.getString("categoria_peso"));
+                    l.setEntrada(rs.getString("entrada"));
+                    l.setFoto_url(rs.getString("foto_url"));
+                    l.setVeces_consultado(rs.getInt("veces_consultado"));
+                    lista.add(l);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public boolean guardarCombateYParticipantes(Combate c, List<Integer> idParticipantes) {
+        try {
+            conn.setAutoCommit(false);
+
+            boolean exitoCombate;
+            if (c.getIdCombate() == 0) {
+                exitoCombate = combateInsertarConClave(c);
+            } else {
+                exitoCombate = combateActualizar(c);
+            }
+
+            if (!exitoCombate) {
+                conn.rollback();
+                return false;
+            }
+
+            String sqlDelete = "DELETE FROM combate_loitador WHERE id_combate = ?";
+            try (PreparedStatement psDel = conn.prepareStatement(sqlDelete)) {
+                psDel.setInt(1, c.getIdCombate());
+                psDel.executeUpdate();
+            }
+
+            String sqlInsert = "INSERT INTO combate_loitador (id_combate, id_loitador) VALUES (?, ?)";
+            try (PreparedStatement psIns = conn.prepareStatement(sqlInsert)) {
+                for (Integer idLoitador : idParticipantes) {
+                    psIns.setInt(1, c.getIdCombate());
+                    psIns.setInt(2, idLoitador);
+                    psIns.addBatch();
+                }
+                psIns.executeBatch();
+            }
+
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean combateInsertarConClave(Combate c) {
+        String sql = "INSERT INTO combate (id_ppv, id_titulo_en_xogo, id_loitador_ganador, tipo_combate, orde_no_ppv) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, c.getIdPpv());
+
+            if (c.getIdTituloEnXogo() == null) {
+                ps.setNull(2, Types.INTEGER);
+            } else {
+                ps.setInt(2, c.getIdTituloEnXogo());
+            }
+
+            if (c.getIdLoitadorGanador() == null) {
+                ps.setNull(3, Types.INTEGER);
+            } else {
+                ps.setInt(3, c.getIdLoitadorGanador());
+            }
+
+            ps.setString(4, c.getTipoCombate());
+            ps.setInt(5, c.getOrdeNoPpv());
+
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        c.setIdCombate(rs.getInt(1));
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //EQUIPO 
     public List<Equipo> equipoListar() {
         List<Equipo> lista = new ArrayList<>();
@@ -220,7 +333,7 @@ public class OperacionsBD {
         if (l.getId_loitador() == 0) {
             sql = "INSERT INTO loitador (nome, estado, categoria_peso, entrada, foto_url) VALUES (?, ?, ?, ?, ?)";
         } else {
-            sql = "UPDATE loitador SET nome = ?, estado = ?, categoria_peso = ?, entrada = ?, foto_url = ? WHERE id_loitador = ?";
+            sql = "UPDATE loitador SET nome = ?, estado = ?, categoria_peso = ?, entrada = ?, foto_url = ?, veces_consultado = ? WHERE id_loitador = ?";
         }
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -229,9 +342,10 @@ public class OperacionsBD {
             ps.setString(3, l.getCategoria_peso());
             ps.setString(4, l.getEntrada());
             ps.setString(5, l.getFoto_url());
+            ps.setInt(6, l.getVeces_consultado() + 1);
 
             if (l.getId_loitador() != 0) {
-                ps.setInt(6, l.getId_loitador());
+                ps.setInt(7, l.getId_loitador());
             }
 
             ps.executeUpdate();
@@ -252,6 +366,7 @@ public class OperacionsBD {
                 l.setCategoria_peso(rs.getString("categoria_peso"));
                 l.setEntrada(rs.getString("entrada"));
                 l.setFoto_url(rs.getString("foto_url"));
+                l.setVeces_consultado(rs.getInt("veces_consultado"));
                 lista.add(l);
             }
         }
@@ -263,6 +378,15 @@ public class OperacionsBD {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.executeUpdate();
+        }
+    }
+
+    public void incrementarVecesConsultado(int idLoitador) throws SQLException {
+        String sql = "UPDATE loitador SET veces_consultado = veces_consultado + 1 WHERE id_loitador = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idLoitador);
+            pstmt.executeUpdate();
         }
     }
 
@@ -308,15 +432,15 @@ public class OperacionsBD {
         }
     }
     // PPV 
-    
+
     public List<PPV> PPVListar() throws SQLException {
         List<PPV> lista = new ArrayList<>();
         String sql = "SELECT p.id_ppv, p.nome, p.data_celebracion, p.estado, p.localizacion, p.foto_url, p.id_grupo_ppv, "
-                   + "g.nome_grupo, g.descripcion_importancia, g.data_habitual, g.foto_url AS grupo_foto "
-                   + "FROM ppv p "
-                   + "INNER JOIN grupo_ppv g ON p.id_grupo_ppv = g.id_grupo_ppv "
-                   + "ORDER BY p.nome ASC";
-                   
+                + "g.nome_grupo, g.descripcion_importancia, g.data_habitual, g.foto_url AS grupo_foto "
+                + "FROM ppv p "
+                + "INNER JOIN grupo_ppv g ON p.id_grupo_ppv = g.id_grupo_ppv "
+                + "ORDER BY p.nome ASC";
+
         try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 PPV p = new PPV();
@@ -326,14 +450,14 @@ public class OperacionsBD {
                 p.setEstado(rs.getString("estado"));
                 p.setLocalizacion(rs.getString("localizacion"));
                 p.setUrlPoster(rs.getString("foto_url"));
-                
+
                 GrupoPPV g = new GrupoPPV();
                 g.setIdGrupoPpv(rs.getInt("id_grupo_ppv"));
                 g.setNomeGrupo(rs.getString("nome_grupo"));
                 g.setDescripcionImportancia(rs.getString("descripcion_importancia"));
                 g.setDataHabitual(rs.getString("data_habitual"));
                 g.setFotoUrl(rs.getString("grupo_foto"));
-                
+
                 p.setGrupoPPV(g);
                 lista.add(p);
             }
@@ -353,29 +477,29 @@ public class OperacionsBD {
         String sql = "INSERT INTO ppv (nome, data_celebracion, estado, localizacion, foto_url, id_grupo_ppv) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, p.getNombre());
-            
+
             if (p.getDataCelebracion() != null) {
                 ps.setDate(2, new java.sql.Date(p.getDataCelebracion().getTime()));
             } else {
                 ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
             }
-            
+
             ps.setString(3, p.getEstado() != null ? p.getEstado() : "pendente");
-            
+
             if (p.getLocalizacion() == null) {
                 ps.setNull(4, Types.VARCHAR);
             } else {
                 ps.setString(4, p.getLocalizacion());
             }
-            
+
             if (p.getUrlPoster() == null) {
                 ps.setNull(5, Types.VARCHAR);
             } else {
                 ps.setString(5, p.getUrlPoster());
             }
-            
+
             ps.setInt(6, p.getGrupoPPV().getIdGrupoPpv());
-            
+
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -389,30 +513,30 @@ public class OperacionsBD {
         String sql = "UPDATE ppv SET nome = ?, data_celebracion = ?, estado = ?, localizacion = ?, foto_url = ?, id_grupo_ppv = ? WHERE id_ppv = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, p.getNombre());
-            
+
             if (p.getDataCelebracion() != null) {
                 ps.setDate(2, new java.sql.Date(p.getDataCelebracion().getTime()));
             } else {
                 ps.setDate(2, new java.sql.Date(System.currentTimeMillis()));
             }
-            
+
             ps.setString(3, p.getEstado() != null ? p.getEstado() : "pendente");
-            
+
             if (p.getLocalizacion() == null) {
                 ps.setNull(4, Types.VARCHAR);
             } else {
                 ps.setString(4, p.getLocalizacion());
             }
-            
+
             if (p.getUrlPoster() == null) {
                 ps.setNull(5, Types.VARCHAR);
             } else {
                 ps.setString(5, p.getUrlPoster());
             }
-            
+
             ps.setInt(6, p.getGrupoPPV().getIdGrupoPpv());
             ps.setInt(7, p.getId_ppv());
-            
+
             ps.executeUpdate();
         }
     }
@@ -425,7 +549,7 @@ public class OperacionsBD {
         }
     }
     // GRUPO PPV 
-    
+
     public List<GrupoPPV> grupoPPVListar() {
         List<GrupoPPV> lista = new ArrayList<>();
         String sql = "SELECT id_grupo_ppv, nome_grupo, descripcion_importancia, data_habitual, foto_url "
@@ -479,14 +603,12 @@ public class OperacionsBD {
             return false;
         }
     }
-    
+
     // TITULO
-    
     public List<Titulo> tituloListar() throws SQLException {
         List<Titulo> lista = new ArrayList<>();
         String sql = "SELECT * FROM titulo ORDER BY nome ASC";
-        try (PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Titulo t = new Titulo();
                 t.setId_titulo(rs.getInt("id_titulo"));
@@ -519,7 +641,9 @@ public class OperacionsBD {
             ps.setBoolean(5, t.isMaximo());
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) t.setId_titulo(rs.getInt(1));
+                if (rs.next()) {
+                    t.setId_titulo(rs.getInt(1));
+                }
             }
         }
     }
@@ -544,7 +668,7 @@ public class OperacionsBD {
             ps.executeUpdate();
         }
     }
-    
+
     // ESTADISTICAS
     public String getLoitadorMaisCombatesPPV() throws SQLException {
         String sql = "SELECT l.nome, COUNT(cl.id_combate) as total "
@@ -599,6 +723,16 @@ public class OperacionsBD {
     }
 
     public String getLoitadorMaisConsultado() {
-        return "Pendiente de implementar";
+        String sql = "SELECT nome FROM loitador ORDER BY veces_consultado DESC LIMIT 1";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getString("nome");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Non hai datos";
     }
 }

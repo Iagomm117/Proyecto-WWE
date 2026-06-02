@@ -9,17 +9,19 @@ public class Loitador {
     private String categoria_peso;
     private String entrada;
     private String foto_url;
+    private int veces_consultado;
 
     public Loitador() {
     }
 
-    public Loitador(int id_loitador, String nome, String estado, String categoria_peso, String entrada, String foto_url) {
+    public Loitador(int id_loitador, String nome, String estado, String categoria_peso, String entrada, String foto_url, int veces_consultado) {
         this.id_loitador = id_loitador;
         this.nome = nome;
         this.estado = estado;
         this.categoria_peso = categoria_peso;
         this.entrada = entrada;
         this.foto_url = foto_url;
+        this.veces_consultado = veces_consultado;
     }
 
 
@@ -70,6 +72,16 @@ public class Loitador {
     public void setFoto_url(String foto_url) {
         this.foto_url = foto_url;
     }
+
+    public int getVeces_consultado() {
+        return veces_consultado;
+    }
+
+    public void setVeces_consultado(int veces_consultado) {
+        this.veces_consultado = veces_consultado;
+    }
+    
+    
     @Override
     public String toString() {
         return nome;

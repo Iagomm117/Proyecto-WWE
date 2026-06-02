@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view.combate;
 
 /**
@@ -38,10 +34,15 @@ public class CombateJFrame extends javax.swing.JFrame {
         txtTipoCombate = new javax.swing.JTextField();
         lblOrden = new javax.swing.JLabel();
         spinOrden = new javax.swing.JSpinner();
+        lblParticipantes = new javax.swing.JLabel();
+        scrollParticipantes = new javax.swing.JScrollPane();
+        tablaParticipantes = new javax.swing.JTable();
+        btnAgregarLuchador = new javax.swing.JButton();
+        btnQuitarLuchador = new javax.swing.JButton();
         lblGanador = new javax.swing.JLabel();
-        txtIdGanador = new javax.swing.JTextField();
+        comboGanador = new javax.swing.JComboBox<>();
         lblTitulo = new javax.swing.JLabel();
-        txtIdTitulo = new javax.swing.JTextField();
+        comboTitulo = new javax.swing.JComboBox<>();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -51,34 +52,55 @@ public class CombateJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(220);
 
-        listaCombates.setBackground(new java.awt.Color(30, 30, 30));
-        listaCombates.setForeground(new java.awt.Color(255, 255, 255));
         scrollLista.setViewportView(listaCombates);
 
         splitPane.setLeftComponent(scrollLista);
 
-        panelDerecho.setBackground(new java.awt.Color(18, 18, 18));
-
-        lblPpvContexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblPpvContexto.setForeground(new java.awt.Color(255, 255, 255));
         lblPpvContexto.setText("Combates del PPV: ");
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo Registro");
 
-        lblTipo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTipo.setText("Tipo de Combate (ej. Hell in a Cell):");
+        lblTipo.setText("Tipo de Combate (ej. Triple Threat, Royal Rumble):");
 
-        lblOrden.setForeground(new java.awt.Color(255, 255, 255));
-        lblOrden.setText("Orden en el Evento:");
+        lblOrden.setText("Orden en cartelera:");
 
         spinOrden.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
-        lblGanador.setForeground(new java.awt.Color(255, 255, 255));
-        lblGanador.setText("ID del Luchador Ganador (Vacío = Sin resultado/Empate):");
+        lblParticipantes.setText("Luchadores Participantes en este Combate:");
 
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("ID del Título en Juego (Vacío = Combate No Titular):");
+        tablaParticipantes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre del Luchador"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrollParticipantes.setViewportView(tablaParticipantes);
+
+        btnAgregarLuchador.setText("+ Añadir Luchador");
+
+        btnQuitarLuchador.setText("- Quitar Seleccionado");
+
+        lblGanador.setText("Luchador Ganador (Elegir de la lista):");
+
+        lblTitulo.setText("Título en Juego (Si corresponde):");
 
         btnNuevo.setBackground(new java.awt.Color(52, 152, 219));
         btnNuevo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -104,14 +126,28 @@ public class CombateJFrame extends javax.swing.JFrame {
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPpvContexto, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTipoCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spinOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTipoCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addComponent(scrollParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDerechoLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(btnAgregarLuchador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelDerechoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnQuitarLuchador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(lblGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelDerechoLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,37 +155,46 @@ public class CombateJFrame extends javax.swing.JFrame {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         panelDerechoLayout.setVerticalGroup(
             panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDerechoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(lblPpvContexto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(10, 10, 10)
                 .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
-                .addComponent(txtTipoCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTipoCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(lblOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(spinOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelDerechoLayout.createSequentialGroup()
+                        .addComponent(btnAgregarLuchador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuitarLuchador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addComponent(lblGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(txtIdGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addComponent(comboGanador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(txtIdTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(comboTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         splitPane.setRightComponent(panelDerecho);
@@ -158,7 +203,7 @@ public class CombateJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +213,6 @@ public class CombateJFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     public javax.swing.JList<model.Combate> getListaCombates() {
         return listaCombates;
@@ -190,12 +234,24 @@ public class CombateJFrame extends javax.swing.JFrame {
         return spinOrden;
     }
 
-    public javax.swing.JTextField getTxtIdGanador() {
-        return txtIdGanador;
+    public javax.swing.JComboBox<model.Loitador> getComboGanador() {
+        return comboGanador;
     }
 
-    public javax.swing.JTextField getTxtIdTitulo() {
-        return txtIdTitulo;
+    public javax.swing.JComboBox<model.Titulo> getComboTitulo() {
+        return comboTitulo;
+    }
+
+    public javax.swing.JTable getTablaParticipantes() {
+        return tablaParticipantes;
+    }
+
+    public javax.swing.JButton getBtnAgregarLuchador() {
+        return btnAgregarLuchador;
+    }
+
+    public javax.swing.JButton getBtnQuitarLuchador() {
+        return btnQuitarLuchador;
     }
 
     public javax.swing.JButton getBtnNuevo() {
@@ -210,22 +266,27 @@ public class CombateJFrame extends javax.swing.JFrame {
         return btnEliminar;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarLuchador;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnQuitarLuchador;
+    private javax.swing.JComboBox<model.Loitador> comboGanador;
+    private javax.swing.JComboBox<model.Titulo> comboTitulo;
     private javax.swing.JLabel lblGanador;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblOrden;
+    private javax.swing.JLabel lblParticipantes;
     private javax.swing.JLabel lblPpvContexto;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<model.Combate> listaCombates;
     private javax.swing.JPanel panelDerecho;
     private javax.swing.JScrollPane scrollLista;
+    private javax.swing.JScrollPane scrollParticipantes;
     private javax.swing.JSpinner spinOrden;
     private javax.swing.JSplitPane splitPane;
-    private javax.swing.JTextField txtIdGanador;
-    private javax.swing.JTextField txtIdTitulo;
+    private javax.swing.JTable tablaParticipantes;
     private javax.swing.JTextField txtTipoCombate;
     // End of variables declaration//GEN-END:variables
 }

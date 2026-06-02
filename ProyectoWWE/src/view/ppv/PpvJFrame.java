@@ -51,29 +51,21 @@ public class PpvJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(250);
 
-        listaPPVs.setBackground(new java.awt.Color(30, 30, 30));
-        listaPPVs.setForeground(new java.awt.Color(255, 255, 255));
         scrollLista.setViewportView(listaPPVs);
 
         splitPane.setLeftComponent(scrollLista);
 
-        panelDerecho.setBackground(new java.awt.Color(18, 18, 18));
-
         lblPoster.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPoster.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo PPV");
 
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
         nombreLabel.setText("Nombre del Evento:");
 
-        grupoLabel.setForeground(new java.awt.Color(255, 255, 255));
         grupoLabel.setText("Grupo de PPV:");
 
         btnNuevoGrupo.setText("+");
 
-        urlLabel.setForeground(new java.awt.Color(255, 255, 255));
         urlLabel.setText("URL del Póster:");
 
         btnNuevo.setBackground(new java.awt.Color(52, 152, 219));

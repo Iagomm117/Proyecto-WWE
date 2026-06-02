@@ -9,11 +9,13 @@ import javax.swing.JOptionPane;
 import controller.marca.MarcaJFrameController;
 import controller.ppv.PPVJFrameController;
 import controller.titulo.TituloJFrameController;
+import java.awt.Image;
 import java.sql.SQLException;
 import main.OperacionsBD;
 import view.MainJFrame;
 import view.equipo.EquipoJFrame;
 import view.estadisticas.EstadisticasJFrame;
+import view.login.LoginFrame;
 import view.luchador.LuchadorJFrame;
 import view.marca.MarcaJFrame;
 import view.ppv.PpvJFrame;
@@ -25,9 +27,11 @@ import view.titulo.TituloJFrame;
  */
 public class MainController {
    private MainJFrame view;
+   private Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(LoginFrame.class.getResource("/res/wwe-64.png"));
 
     public MainController(MainJFrame view) {
         this.view = view;
+        this.view.setIconImage(icon);
         this.view.addMarcaListener(getMenuListener("Marca"));
         this.view.addEquipoListener(getMenuListener("Equipo"));
         this.view.addLuchadorListener(getMenuListener("Luchador"));

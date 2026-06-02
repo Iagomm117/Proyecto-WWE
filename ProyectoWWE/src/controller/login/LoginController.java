@@ -1,25 +1,32 @@
 package controller.login;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import view.login.LoginFrame;
 import javax.swing.JOptionPane;
 import main.OperacionsBD;
 import service.Seguridad;
-import view.usuarios.RegisterFrame;
+import util.TemaUtil;
+import view.login.RegisterFrame;
 
 public class LoginController {
 
     private LoginFrame view;
+    private Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(LoginFrame.class.getResource("/res/wwe-64.png"));
 
     public LoginController(LoginFrame view) {
         this.view = view;
+        this.view.setIconImage(icon);
         this.view.addLoginButtonActionListener(this.getLoginListener());
         this.view.addRegisterButtonActionListener(this.getRegisterListener());
+        configurarBtnTema();
+
     }
 
     private ActionListener getLoginListener() {
@@ -52,6 +59,26 @@ public class LoginController {
                 }
             }
         };
+    }
+
+    private void configurarBtnTema() {
+        int tamano = 32;
+        ImageIcon sunIcon = getIconoRedimensionado("/res/sol.png", tamano, tamano);
+        ImageIcon moonIcon = getIconoRedimensionado("/res/luna.png", tamano, tamano);
+
+        view.getThemeButton().setIcon(TemaUtil.esModoOscuro() ? sunIcon : moonIcon);
+
+        view.getThemeButton().addActionListener(e -> {
+            TemaUtil.alternarTema();
+            view.getThemeButton().setIcon(TemaUtil.esModoOscuro() ? sunIcon : moonIcon);
+        });
+    }
+
+    private ImageIcon getIconoRedimensionado(String path, int ancho, int alto) {
+        ImageIcon originalIcon = new ImageIcon(getClass().getResource(path));
+        Image image = originalIcon.getImage();
+        Image newimg = image.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(newimg);
     }
 
     private ActionListener getRegisterListener() {

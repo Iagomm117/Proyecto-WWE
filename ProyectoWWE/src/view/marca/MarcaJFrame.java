@@ -46,24 +46,17 @@ public class MarcaJFrame extends javax.swing.JFrame {
 
         splitPane.setDividerLocation(250);
 
-        listaMarcas.setBackground(new java.awt.Color(30, 30, 30));
-        listaMarcas.setForeground(new java.awt.Color(255, 255, 255));
         scrollLista.setViewportView(listaMarcas);
 
         splitPane.setLeftComponent(scrollLista);
 
-        panelDerecho.setBackground(new java.awt.Color(0, 0, 0));
-
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblId.setForeground(new java.awt.Color(150, 150, 150));
         lblId.setText("ID: Nuevo Registro");
 
-        nombreLabel.setForeground(new java.awt.Color(255, 255, 255));
         nombreLabel.setText("Nombre de la Marca:");
 
-        urlLabel.setForeground(new java.awt.Color(255, 255, 255));
         urlLabel.setText("URL del Logo:");
 
         btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
@@ -135,7 +128,7 @@ public class MarcaJFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(splitPane)
         );
 
         pack();

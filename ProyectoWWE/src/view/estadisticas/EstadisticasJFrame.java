@@ -28,109 +28,211 @@ public class EstadisticasJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelKPIs = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblLuchadorCombates = new javax.swing.JLabel();
+        btnRpt1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblLuchadorConsultado = new javax.swing.JLabel();
+        btnRpt2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lblPpvFechas = new javax.swing.JLabel();
+        btnRpt3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         lblMarcaLuchadores = new javax.swing.JLabel();
+        btnRpt4 = new javax.swing.JButton();
+        panelLuchadores = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLuchadoresSemanales = new javax.swing.JTextArea();
+        btnReporteLuchadores = new javax.swing.JButton();
+        panelTitulos = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtTitulosSemanales = new javax.swing.JTextArea();
+        btnReporteTitulos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Formulario de Estadísticas - WWE Analytics");
+        setTitle("Panel de Control y Estadísticas - WWE Analytics");
+        setResizable(false);
 
-        jLabel1.setText("Luchador con más combates PPV:");
+        panelKPIs.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Métricas Globales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jLabel1.setText("Luchador (Combates):");
 
         lblLuchadorCombates.setText("Cargando...");
 
-        jLabel2.setText("Luchador más consultado:");
+        btnRpt1.setText("Ver Reporte");
+
+        jLabel2.setText("Luchador (Consultas):");
 
         lblLuchadorConsultado.setText("Cargando...");
 
-        jLabel3.setText("PPV con más ediciones:");
+        btnRpt2.setText("Ver Reporte");
+
+        jLabel3.setText("PPV (Ediciones):");
 
         lblPpvFechas.setText("Cargando...");
 
-        jLabel4.setText("Marca con más luchadores:");
+        btnRpt3.setText("Ver Reporte");
+
+        jLabel4.setText("Marca (Luchadores):");
 
         lblMarcaLuchadores.setText("Cargando...");
 
-        jLabel5.setText("Luchadores modificados (última semana):");
+        btnRpt4.setText("Ver Reporte");
+
+        org.jdesktop.layout.GroupLayout panelKPIsLayout = new org.jdesktop.layout.GroupLayout(panelKPIs);
+        panelKPIs.setLayout(panelKPIsLayout);
+        panelKPIsLayout.setHorizontalGroup(
+            panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelKPIsLayout.createSequentialGroup()
+                .add(20, 20, 20)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1)
+                    .add(jLabel2)
+                    .add(jLabel3)
+                    .add(jLabel4))
+                .add(30, 30, 30)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(lblLuchadorCombates, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblLuchadorConsultado, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblPpvFechas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(lblMarcaLuchadores, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(20, 20, 20)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(btnRpt1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnRpt2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnRpt3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(btnRpt4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelKPIsLayout.setVerticalGroup(
+            panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelKPIsLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel1)
+                    .add(lblLuchadorCombates)
+                    .add(btnRpt1))
+                .add(10, 10, 10)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(lblLuchadorConsultado)
+                    .add(btnRpt2))
+                .add(10, 10, 10)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel3)
+                    .add(lblPpvFechas)
+                    .add(btnRpt3))
+                .add(10, 10, 10)
+                .add(panelKPIsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel4)
+                    .add(lblMarcaLuchadores)
+                    .add(btnRpt4))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        panelLuchadores.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Auditoría: Luchadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jLabel5.setText("Modificados (última semana):");
 
         txtLuchadoresSemanales.setColumns(20);
         txtLuchadoresSemanales.setRows(5);
+        txtLuchadoresSemanales.setEditable(false);
         jScrollPane1.setViewportView(txtLuchadoresSemanales);
 
-        jLabel6.setText("Títulos modificados (última semana):");
+        btnReporteLuchadores.setText("Reporte Luchadores");
+
+        org.jdesktop.layout.GroupLayout panelLuchadoresLayout = new org.jdesktop.layout.GroupLayout(panelLuchadores);
+        panelLuchadores.setLayout(panelLuchadoresLayout);
+        panelLuchadoresLayout.setHorizontalGroup(
+            panelLuchadoresLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelLuchadoresLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(panelLuchadoresLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .add(btnReporteLuchadores, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(15, 15, 15))
+        );
+        panelLuchadoresLayout.setVerticalGroup(
+            panelLuchadoresLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelLuchadoresLayout.createSequentialGroup()
+                .add(10, 10, 10)
+                .add(jLabel5)
+                .add(10, 10, 10)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btnReporteLuchadores, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panelTitulos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Auditoría: Títulos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jLabel6.setText("Modificados (última semana):");
 
         txtTitulosSemanales.setColumns(20);
         txtTitulosSemanales.setRows(5);
+        txtTitulosSemanales.setEditable(false);
         jScrollPane2.setViewportView(txtTitulosSemanales);
+
+        btnReporteTitulos.setText("Reporte Títulos");
+
+        org.jdesktop.layout.GroupLayout panelTitulosLayout = new org.jdesktop.layout.GroupLayout(panelTitulos);
+        panelTitulos.setLayout(panelTitulosLayout);
+        panelTitulosLayout.setHorizontalGroup(
+            panelTitulosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelTitulosLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(panelTitulosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .add(btnReporteTitulos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(15, 15, 15))
+        );
+        panelTitulosLayout.setVerticalGroup(
+            panelTitulosLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelTitulosLayout.createSequentialGroup()
+                .add(10, 10, 10)
+                .add(jLabel6)
+                .add(10, 10, 10)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(btnReporteTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(15, 15, 15))
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(25, 25, 25)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(jLabel2)
-                    .add(jLabel3)
-                    .add(jLabel4)
-                    .add(jLabel5)
-                    .add(jLabel6))
-                .add(30, 30, 30)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblLuchadorCombates)
-                    .add(lblLuchadorConsultado)
-                    .add(lblPpvFechas)
-                    .add(lblMarcaLuchadores)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 350, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 350, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE))
-                .addContainerGap(25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE))
+                .add(20, 20, 20)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(panelKPIs, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(layout.createSequentialGroup()
+                        .add(panelLuchadores, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(20, 20, 20)
+                        .add(panelTitulos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(25, 25, 25)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(lblLuchadorCombates))
                 .add(20, 20, 20)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel2)
-                    .add(lblLuchadorConsultado))
+                .add(panelKPIs, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(20, 20, 20)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel3)
-                    .add(lblPpvFechas))
-                .add(20, 20, 20)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel4)
-                    .add(lblMarcaLuchadores))
-                .add(20, 20, 20)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel5)
-                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 80, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE))
-                .add(20, 20, 20)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel6)
-                    .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 80, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE))
-                .addContainerGap(25, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(panelLuchadores, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(panelTitulos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     public void setLuchadorCombates(String texto) {
         this.lblLuchadorCombates.setText(texto);
     }
@@ -155,7 +257,37 @@ public class EstadisticasJFrame extends javax.swing.JFrame {
         this.txtTitulosSemanales.setText(texto);
     }
 
+    public javax.swing.JButton getBtnRpt1() {
+        return btnRpt1;
+    }
+
+    public javax.swing.JButton getBtnRpt2() {
+        return btnRpt2;
+    }
+
+    public javax.swing.JButton getBtnRpt3() {
+        return btnRpt3;
+    }
+
+    public javax.swing.JButton getBtnRpt4() {
+        return btnRpt4;
+    }
+
+    public javax.swing.JButton getBtnReporteLuchadores() {
+        return btnReporteLuchadores;
+    }
+
+    public javax.swing.JButton getBtnReporteTitulos() {
+        return btnReporteTitulos;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporteLuchadores;
+    private javax.swing.JButton btnReporteTitulos;
+    private javax.swing.JButton btnRpt1;
+    private javax.swing.JButton btnRpt2;
+    private javax.swing.JButton btnRpt3;
+    private javax.swing.JButton btnRpt4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -168,6 +300,9 @@ public class EstadisticasJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblLuchadorConsultado;
     private javax.swing.JLabel lblMarcaLuchadores;
     private javax.swing.JLabel lblPpvFechas;
+    private javax.swing.JPanel panelKPIs;
+    private javax.swing.JPanel panelLuchadores;
+    private javax.swing.JPanel panelTitulos;
     private javax.swing.JTextArea txtLuchadoresSemanales;
     private javax.swing.JTextArea txtTitulosSemanales;
     // End of variables declaration//GEN-END:variables
