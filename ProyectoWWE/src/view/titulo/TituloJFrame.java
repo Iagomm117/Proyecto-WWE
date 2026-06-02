@@ -68,6 +68,8 @@ public class TituloJFrame extends javax.swing.JFrame {
 
         estadoLabel.setText("Estado:");
 
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "vacante", "inactivo" }));
+
         dataLabel.setText("Fecha de Vigencia:");
 
         fotoUrlLabel.setText("URL Foto/Logo:");
